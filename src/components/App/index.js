@@ -12,14 +12,18 @@ function App() {
   function convertMoney(str) {
     // test regex https://regex101.com/r/r4IFaG/2
     const isValid = new RegExp(/(\d+[.]\d+\d+)|(Rp\d.+)|(0+[1-9]+)/g).test(str);
+    const wrongPosition = new RegExp(/\d+[\s|a-z]+/gi).test(str);
 
-    str = str.replace(/\./g, "");
-    str = str.replace(/rp/gi, "");
-
-    if (isValid) return parseFloat(str);
+    if (wrongPosition) return "invalid number";
     else {
-      if (Number(str)) return parseFloat(str);
-      else return "invalid number";
+      str = str.replace(/\./g, "");
+      str = str.replace(/rp/gi, "");
+
+      if (isValid) return parseFloat(str);
+      else {
+        if (Number(str)) return parseFloat(str);
+        else return "invalid number";
+      }
     }
   }
 
@@ -82,7 +86,7 @@ function ListOFMoney({ list }) {
   const sortList = Object.keys(list).sort((a, b) => b - a);
 
   return (
-    <div className={styles.wrapperList}>
+    <div data-testid="listMoney" className={styles.wrapperList}>
       {sortList.map((key, i) => (
         <React.Fragment key={i}>
           {Number(list[key]) ? (
@@ -90,7 +94,10 @@ function ListOFMoney({ list }) {
               {list[key]} <small>X</small> {key}
             </div>
           ) : (
-            <div> left Rp{key} (no available fraction)</div>
+            <div data-testid="leftFractionText">
+              {" "}
+              left Rp{key} (no available fraction)
+            </div>
           )}
         </React.Fragment>
       ))}
