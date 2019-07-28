@@ -11,3 +11,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 23%;
+  }
+  50% {
+    background-position: 100% 78%;
+  }
+  100% {
+    background-position: 0% 23%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 23%;
+  }
+  50% {
+    background-position: 100% 78%;
+  }
+  100% {
+    background-position: 0% 23%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 23%;
+  }
+  50% {
+    background-position: 100% 78%;
+  }
+  100% {
+    background-position: 0% 23%;
+  }
+}
+
+#root {
+  height: 100vh;
+  background: linear-gradient(330deg, #7e57c2, #9778d2, #311b92);
+  background-size: 600% 600%;
+  color: #fff;
+
+  -webkit-animation: AnimationName 9s ease infinite;
+  -moz-animation: AnimationName 9s ease infinite;
+  animation: AnimationName 9s ease infinite;
+}
